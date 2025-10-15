@@ -45,7 +45,7 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <pre>{{ product|json }}</pre>
+        
         <fieldset class="js product-form__input product-form__input--pill">
           <legend class="form__label">{{ option.name }}</legend>
           {% render 'product-variant-options',
