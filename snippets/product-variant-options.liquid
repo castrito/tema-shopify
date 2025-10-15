@@ -95,7 +95,12 @@
       {{ value -}}
       {{ label_unavailable }}
     </label>
-    <img src="{{ product.featured_image | image_url: width: 1000 }}">
+    
+    {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width: 100 }}" alt="{{ value }}" class="swatch-image">
+      {% else %}
+        <span class="swatch-color" style="background-color: {{ value | downcase }}"></span>
+    {% endif %}
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
