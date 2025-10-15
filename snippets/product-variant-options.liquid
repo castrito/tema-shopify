@@ -59,8 +59,7 @@
   {%- endcapture -%}
 
   {%- assign variant = product.variants | where: 'option1', value | first -%}
-  <pre>{{ variant|json }}</pre>
-  
+
   {%- if picker_type == 'swatch' -%}
     {%- capture help_text -%}
       <span class="visually-hidden">{{ value | escape }}</span>
@@ -98,6 +97,13 @@
       {{ value -}}
       {{ label_unavailable }}
     </label>
+    {% if variant.featured_image %}
+      <img src="{{ variant.featured_image | image_url: width: 80 }}"
+           alt="{{ value }}"
+           class="variant-swatch__img">
+    {% else %}
+      <span class="variant-swatch__color" style="background-color: {{ value | downcase }};"></span>
+    {% endif %}
         
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
