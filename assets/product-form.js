@@ -131,3 +131,38 @@ if (!customElements.get('product-form')) {
     }
   );
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.getElementById("quantitySlider");
+  const quantityValue = document.getElementById("quantityValue");
+  const unitPrice = document.getElementById("unitPrice");
+  const totalPrice = document.getElementById("totalPrice");
+  const quantityInput = document.getElementById("quantityInput");
+
+  if (!slider) return;
+
+  // Definir rangos de precios
+  const priceTiers = [
+    { min: 100, max: 499, price: 2.00 },
+    { min: 500, max: 999, price: 1.87 },
+    { min: 1000, max: 4999, price: 1.75 },
+    { min: 5000, max: 10000, price: 1.65 },
+  ];
+
+  function getPriceForQuantity(qty) {
+    const tier = priceTiers.find(t => qty >= t.min && qty <= t.max);
+    return tier ? tier.price : priceTiers[0].price;
+  }
+
+  function updateDisplay() {
+    const qty = parseInt(slider.value);
+    const price = getPriceForQuantity(qty);
+    quantityValue.textContent = qty;
+    unitPrice.textContent = `$${price.toFixed(2)}`;
+    totalPrice.textContent = `$${(qty * price).toFixed(2)}`;
+    quantityInput.value = qty;
+  }
+
+  slider.addEventListener("input", updateDisplay);
+  updateDisplay();
+});
