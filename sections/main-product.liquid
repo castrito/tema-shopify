@@ -85,6 +85,23 @@
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+          <div class="quantity-slider-wrapper">
+            <h4>Choose Your Quantity:</h4>
+
+            <input type="range" id="quantitySlider" min="100" max="10000" step="100" value="100">
+            <div class="quantity-info">
+              <span id="quantityValue">100</span> units
+            </div>
+
+            <div class="price-info">
+              <p>Unit Price: <span id="unitPrice"></span></p>
+              <p>Total: <strong id="totalPrice"></strong></p>
+            </div>
+
+            <input type="hidden" name="quantity" id="quantityInput" value="100">
+          </div>
+
+
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when '@app' -%}
