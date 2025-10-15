@@ -83,7 +83,7 @@
       {% if variant.featured_image %}
         <img
           src="{{ variant.featured_image | image_url: width: 80 }}"
-          alt="{{ value }}"
+          alt="{{ value | escape }}"
           class="variant-thumb"
         >
       {% endif %}
