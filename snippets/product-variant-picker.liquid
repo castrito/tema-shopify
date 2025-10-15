@@ -15,7 +15,20 @@
     {{ block.shopify_attributes }}
   >
     {%- for option in product.options_with_values -%}
-      <pre>{{ option.values | json }}</pre>      
+      
+
+      {% for value in option.values %}
+          {% assign variant = product.variants | where: 'option1', value | first %}
+          <label class="swatch-item" data-color="{{ value }}" data-variant-id="{{ variant.id }}">
+            <input type="radio" name="color" value="{{ value }}" class="sr-only">
+            {% if variant.featured_image %}
+              <img src="{{ variant.featured_image | image_url: width: 100 }}" alt="{{ value }}" class="swatch-image">
+            {% else %}
+              <span class="swatch-color" style="background-color: {{ value | downcase }}"></span>
+            {% endif %}
+          </label>
+        {% endfor %}
+        
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
