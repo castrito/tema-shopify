@@ -84,8 +84,10 @@
         <img
           src="{{ variant.featured_image | image_url: width: 80 }}"
           alt="{{ value | escape }}"
+          width="{{ variant.featured_image.width }}"
+          height="{{ variant.featured_image.height }}"
           class="variant-thumb"
-        >
+        >        
       {% endif %}
       <input
         type="radio"
