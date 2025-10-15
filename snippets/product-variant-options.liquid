@@ -95,7 +95,7 @@
       {{ value -}}
       {{ label_unavailable }}
     </label>
-    <pre>{{ product | json }}</pre>
+    <img src="{{ product.featured_image | image_url: width: 1000 }}">
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
